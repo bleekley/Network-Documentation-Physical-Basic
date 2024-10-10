@@ -3,6 +3,7 @@
 This project contains Python scripts for generating network topology diagrams using CDP/LLDP information from network devices.
 
 ## Features:
+- Collect Cisco Catalyst Switch discovery data from devices in the devices.csv file.
 - Collect `show cdp neighbors` and `show lldp neighbors` from devices.
 - Generate Mermaid diagrams of the network topology.
 - Automatically omit certain patterns (like `.strongs.tv`).
