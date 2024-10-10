@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 _attributes.py
 *.log
+envUCHTest/
 
 # C extensions
 *.so
