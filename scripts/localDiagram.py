@@ -1,13 +1,24 @@
 import csv
 import os
+import sys
 from netmiko import ConnectHandler
 import logging
 
-# Initialize logger with console output
+# Add parent directory to the module search path
+parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(parent_dir)
+
+# Define the path to the devices.csv file in the parent directory
+csv_file_path = os.path.join(parent_dir, 'devices.csv')
+
+# Initialize logger
+logging.basicConfig(filename='session_data.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+
+'''# Initialize logger with console output
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s', handlers=[
     logging.FileHandler("mermaid_diagrams.log"),
     logging.StreamHandler()  # This will print to the terminal as well
-])
+])'''
 
 # Function to load device credentials from a file (_attributes.py)
 def load_credentials():

@@ -1,8 +1,16 @@
 import csv
 import os
+import sys
 from ping3 import ping
 from netmiko import ConnectHandler
 import logging
+
+# Add parent directory to the module search path
+parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(parent_dir)
+
+# Define the path to the devices.csv file in the parent directory
+csv_file_path = os.path.join(parent_dir, 'devices.csv')
 
 # Initialize logger
 logging.basicConfig(filename='session_data.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
@@ -18,38 +26,6 @@ def ping_device(ip):
     return response is not None
 
 # Function to SSH into a device and run commands
-'''def ssh_to_device(ip, device_name, username, password):
-    device = {
-        'device_type': 'cisco_ios',
-        'ip': ip,
-        'username': username,
-        'password': password,
-    }
-
-    try:
-        logging.info(f"Connecting to {device_name} ({ip})")
-        connection = ConnectHandler(**device)
-
-        # Collect command outputs
-        commands = [
-            'show version', 'show cdp neighbor', 'show cdp neighbor detail',
-            'show lldp neighbor', 'show interface status', 'show ip interface brief',
-            'show ip arp', 'show mac address-table', 'show run'
-        ]
-
-        output = {}
-        for cmd in commands:
-            output[cmd] = connection.send_command(cmd)
-
-        logging.info(f"Command output collected from {device_name} ({ip})")
-
-        connection.disconnect()
-
-        return output
-
-    except Exception as e:
-        logging.error(f"Failed to connect to {device_name} ({ip}): {str(e)}")
-        return None'''
 def ssh_to_device(ip, device_name, username, password):
     device = {
         'device_type': 'cisco_ios',
